@@ -22,6 +22,6 @@
  *  @warning If keys overlap in receiver and query dictionary,
  *  behaviour is undefined.
  */
-- (NSURL*) URLByAppendingQuery:(NSDictionary*) queryDictionary;
+- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary;
 
 @end

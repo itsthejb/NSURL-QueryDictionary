@@ -10,13 +10,11 @@
 		490D10F618572D8B00F4AC4C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 490D10F518572D8B00F4AC4C /* XCTest.framework */; };
 		490D10FC18572D8B00F4AC4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 490D10FA18572D8B00F4AC4C /* InfoPlist.strings */; };
 		490D10FE18572D8B00F4AC4C /* UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D10FD18572D8B00F4AC4C /* UnitTests.m */; };
-		49A1A56F18572F73001A7F30 /* NSURL+Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D10EE18572D6C00F4AC4C /* NSURL+Query.m */; };
+		496E68D118573D3700247F60 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 496E68D018573D3700247F60 /* NSURL+QueryDictionary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		490D10DF18572D4F00F4AC4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		490D10ED18572D6C00F4AC4C /* NSURL+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Query.h"; sourceTree = "<group>"; };
-		490D10EE18572D6C00F4AC4C /* NSURL+Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Query.m"; sourceTree = "<group>"; };
 		490D10F418572D8B00F4AC4C /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		490D10F518572D8B00F4AC4C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		490D10F918572D8B00F4AC4C /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
@@ -26,6 +24,8 @@
 		496436D9185738C200EA6A1B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		496436DA185738C200EA6A1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		496436DD185739A100EA6A1B /* NSURL+QueryDictionary.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "NSURL+QueryDictionary.podspec"; sourceTree = "<group>"; };
+		496E68CF18573D3700247F60 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
+		496E68D018573D3700247F60 /* NSURL+QueryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryDictionary.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +43,7 @@
 		490D10D318572D4F00F4AC4C = {
 			isa = PBXGroup;
 			children = (
-				490D10E118572D4F00F4AC4C /* NSURL+Query */,
+				496E68CE18573D3700247F60 /* NSURL+QueryDictionary */,
 				490D10F718572D8B00F4AC4C /* UnitTests */,
 				490D10DE18572D4F00F4AC4C /* Frameworks */,
 				490D10DD18572D4F00F4AC4C /* Products */,
@@ -70,15 +70,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		490D10E118572D4F00F4AC4C /* NSURL+Query */ = {
-			isa = PBXGroup;
-			children = (
-				490D10ED18572D6C00F4AC4C /* NSURL+Query.h */,
-				490D10EE18572D6C00F4AC4C /* NSURL+Query.m */,
-			);
-			path = "NSURL+Query";
-			sourceTree = "<group>";
-		};
 		490D10F718572D8B00F4AC4C /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +87,15 @@
 				490D10FF18572D8B00F4AC4C /* UnitTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		496E68CE18573D3700247F60 /* NSURL+QueryDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				496E68CF18573D3700247F60 /* NSURL+QueryDictionary.h */,
+				496E68D018573D3700247F60 /* NSURL+QueryDictionary.m */,
+			);
+			path = "NSURL+QueryDictionary";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,7 +132,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 490D10D718572D4F00F4AC4C /* Build configuration list for PBXProject "NSURL+Query" */;
+			buildConfigurationList = 490D10D718572D4F00F4AC4C /* Build configuration list for PBXProject "NSURL+QueryDictionary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				490D10FE18572D8B00F4AC4C /* UnitTests.m in Sources */,
-				49A1A56F18572F73001A7F30 /* NSURL+Query.m in Sources */,
+				496E68D118573D3700247F60 /* NSURL+QueryDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +289,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		490D10D718572D4F00F4AC4C /* Build configuration list for PBXProject "NSURL+Query" */ = {
+		490D10D718572D4F00F4AC4C /* Build configuration list for PBXProject "NSURL+QueryDictionary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				490D10E818572D4F00F4AC4C /* Debug */,

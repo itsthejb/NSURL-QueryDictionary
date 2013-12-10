@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Jonathan Crooke. All rights reserved.
 //
 
-#import "NSURL+Query.h"
+#import "NSURL+QueryDictionary.h"
 
 static NSString *const kQuerySeparator  = @"&";
 static NSString *const kQueryDivider    = @"=";

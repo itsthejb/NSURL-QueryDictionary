@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "NSURL+Query.h"
+#import "NSURL+QueryDictionary.h"
 
 #define URL(STRING) ((NSURL*) [NSURL URLWithString: STRING])
 

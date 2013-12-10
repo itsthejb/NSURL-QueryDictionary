@@ -23,6 +23,9 @@
 		490D10FB18572D8B00F4AC4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		490D10FD18572D8B00F4AC4C /* UnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTests.m; sourceTree = "<group>"; };
 		490D10FF18572D8B00F4AC4C /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		496436D9185738C200EA6A1B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		496436DA185738C200EA6A1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		496436DD185739A100EA6A1B /* NSURL+QueryDictionary.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = "NSURL+QueryDictionary.podspec"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,9 @@
 				490D10F718572D8B00F4AC4C /* UnitTests */,
 				490D10DE18572D4F00F4AC4C /* Frameworks */,
 				490D10DD18572D4F00F4AC4C /* Products */,
+				496436D9185738C200EA6A1B /* LICENSE */,
+				496436DD185739A100EA6A1B /* NSURL+QueryDictionary.podspec */,
+				496436DA185738C200EA6A1B /* README.md */,
 			);
 			sourceTree = "<group>";
 		};

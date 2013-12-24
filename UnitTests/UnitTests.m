@@ -75,6 +75,11 @@
                         @"Did not create correctly formatted URL");
 }
 
+- (void) testShouldHandleEmptyValue {
+    NSString *urlString = @"http://www.foo.com?aKey=";
+    XCTAssertEqual([URL(urlString) queryDictionary][@"aKey"], @"", @"Value should be empty string");
+}
+
 @end
 
 #undef URL

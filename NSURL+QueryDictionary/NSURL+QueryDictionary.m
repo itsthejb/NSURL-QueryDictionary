@@ -22,7 +22,7 @@ static NSString *const kFragmentBegin   = @"#";
     if (components.count == 2) {
       NSString *key = [components[0] stringByRemovingPercentEncoding];
       NSString *value = [components[1] stringByRemovingPercentEncoding];
-      mute[key] = value;
+      mute[key] = value ? value : @"";
     }
   }
   return mute.count ? mute.copy : nil;

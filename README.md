@@ -11,9 +11,13 @@ The parsing components of the above are also available separately as:
 * `-[NSString URLQueryDictionary]` split a valid query string into key/value pairs.
 * `-[NSDictionary URLQueryString]` the reverse of above; create a URL query string from an `NSDictionary` instance.
 
-Queries with empty values are converted to `NSNull` and vice versa as of v0.0.4.
+Queries with empty values are converted to `NSNull` and vice versa as of v0.0.5.
 
 ##Version history
+
+**v0.0.5**
+
+Covered an additional empty value case - URL query component has separator, but empty value.
 
 **v0.0.4**
 

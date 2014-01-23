@@ -16,8 +16,41 @@ static NSString *const kFragmentBegin   = @"#";
 @implementation NSURL (Query)
 
 - (NSDictionary*) queryDictionary {
+  return self.query.URLQueryDictionary;
+}
+
+- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
+  NSMutableArray *queries = self.query ? @[self.query].mutableCopy : @[].mutableCopy;
+  NSString *dictionaryQuery = queryDictionary.URLQueryString;
+  if (dictionaryQuery) {
+    [queries addObject:dictionaryQuery];
+  }
+  NSString *newQuery = [queries componentsJoinedByString:kQuerySeparator];
+
+  if (newQuery.length) {
+    NSArray *queryComponents = [self.absoluteString componentsSeparatedByString:kQueryBegin];
+    if (queryComponents.count) {
+      return [NSURL URLWithString:
+              [NSString stringWithFormat:@"%@%@%@%@%@",
+               queryComponents[0],                      // existing url
+               kQueryBegin,
+               newQuery,
+               self.fragment.length ? kFragmentBegin : @"",
+               self.fragment.length ? self.fragment : @""]];
+    }
+  }
+  return self;
+}
+
+@end
+
+#pragma mark -
+
+@implementation NSString (URLQuery)
+
+- (NSDictionary*) URLQueryDictionary {
   NSMutableDictionary *mute = @{}.mutableCopy;
-  for (NSString *query in [self.query componentsSeparatedByString:kQuerySeparator]) {
+  for (NSString *query in [self componentsSeparatedByString:kQuerySeparator]) {
     NSArray *components = [query componentsSeparatedByString:kQueryDivider];
     if (components.count == 2) {
       NSString *key = [components[0] stringByRemovingPercentEncoding];
@@ -28,30 +61,24 @@ static NSString *const kFragmentBegin   = @"#";
   return mute.count ? mute.copy : nil;
 }
 
-- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
-  NSMutableString *query = self.query ? self.query.mutableCopy : @"".mutableCopy;
-  for (NSString *key in queryDictionary.allKeys) {
-    NSString *value = [[queryDictionary[key] description]
+@end
+
+#pragma mark -
+
+@implementation NSDictionary (URLQuery)
+
+- (NSString*) URLQueryString {
+  NSMutableString *queryString = @"".mutableCopy;
+  for (NSString *key in self.allKeys) {
+    NSString *value = [[self[key] description]
                        stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [query appendFormat:@"%@%@%@%@",
-     query.length ? kQuerySeparator : @"",    // appending?
+    [queryString appendFormat:@"%@%@%@%@",
+     queryString.length ? kQuerySeparator : @"",    // appending?
      [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
      kQueryDivider,
      value];
   }
-  if (query.length) {
-    NSArray *queryComponents = [self.absoluteString componentsSeparatedByString:kQueryBegin];
-    if (queryComponents.count) {
-      return [NSURL URLWithString:
-              [NSString stringWithFormat:@"%@%@%@%@%@",
-               queryComponents[0],                      // existing url
-               kQueryBegin,
-               query,
-               self.fragment.length ? kFragmentBegin : @"",
-               self.fragment.length ? self.fragment : @""]];
-    }
-  }
-  return self;
+  return queryString.length ? queryString.copy : nil;
 }
 
 @end

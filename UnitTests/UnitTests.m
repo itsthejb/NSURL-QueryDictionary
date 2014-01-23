@@ -106,6 +106,13 @@
                         @"Did not return correct keys/values");
 }
 
+- (void) testShouldHandlePossiblyInvalidURLWithSeparatorButNoValue {
+  NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
+  XCTAssertEqualObjects(URL(@"http://www.foo.com/?key1=&key2=value").queryDictionary,
+                        dict,
+                        @"Did not return correct keys/values");
+}
+
 - (void) testShouldConvertURLWithEmptyQueryValueToNSNullWithMultipleKeys {
   NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?key1&key2=value").queryDictionary,

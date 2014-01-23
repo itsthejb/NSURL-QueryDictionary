@@ -83,6 +83,36 @@
                         @"Did not create correctly formatted URL");
 }
 
+- (void) testShouldHandleDictionaryWithEmptyPropertiesCorrectly {
+  NSDictionary *dict = @{ @"key" : @"" };
+  XCTAssertEqualObjects([URL(@"http://www.foo.com/")
+                         URLByAppendingQueryDictionary:dict].absoluteString,
+                        @"http://www.foo.com/?key",
+                        @"Did not create correctly formatted URL");
+}
+
+- (void) testShouldHandleDictionaryWithNullPropertyCorrectly {
+  NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
+  XCTAssertEqualObjects([URL(@"http://www.foo.com/")
+                         URLByAppendingQueryDictionary:dict].absoluteString,
+                        @"http://www.foo.com/?key1&key2=value",
+                        @"Did not create correctly formatted URL");
+}
+
+- (void) testShouldConvertURLWithEmptyQueryValueToNSNull {
+  NSDictionary *dict = @{ @"key" : [NSNull null] };
+  XCTAssertEqualObjects(URL(@"http://www.foo.com/?key").queryDictionary,
+                        dict,
+                        @"Did not return correct keys/values");
+}
+
+- (void) testShouldConvertURLWithEmptyQueryValueToNSNullWithMultipleKeys {
+  NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
+  XCTAssertEqualObjects(URL(@"http://www.foo.com/?key1&key2=value").queryDictionary,
+                        dict,
+                        @"Did not return correct keys/values");
+}
+
 @end
 
 #undef URL

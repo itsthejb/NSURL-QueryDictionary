@@ -75,6 +75,14 @@
                         @"Did not create correctly formatted URL");
 }
 
+- (void) testShouldHandleDictionaryValuesOtherThanStrings {
+  NSDictionary *dict = @{@"number":@47, @"date":[NSDate distantPast]};
+  XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
+                         URLByAppendingQueryDictionary:dict].absoluteString,
+                        @"http://www.foo.com/path?number=47&date=0001-12-30%2000:00:00%20+0000",
+                        @"Did not create correctly formatted URL");
+}
+
 @end
 
 #undef URL

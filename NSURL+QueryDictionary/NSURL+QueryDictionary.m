@@ -31,11 +31,13 @@ static NSString *const kFragmentBegin   = @"#";
 - (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
   NSMutableString *query = self.query ? self.query.mutableCopy : @"".mutableCopy;
   for (NSString *key in queryDictionary.allKeys) {
+    NSString *value = [[queryDictionary[key] description]
+                       stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [query appendFormat:@"%@%@%@%@",
      query.length ? kQuerySeparator : @"",    // appending?
      [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
      kQueryDivider,
-     [queryDictionary[key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+     value];
   }
   if (query.length) {
     NSArray *queryComponents = [self.absoluteString componentsSeparatedByString:kQueryBegin];

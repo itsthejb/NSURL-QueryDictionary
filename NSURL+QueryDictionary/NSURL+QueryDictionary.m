@@ -57,10 +57,16 @@ static NSString *const kFragmentBegin   = @"#";
     if (components.count > 0) {
       key = [components[0] stringByRemovingPercentEncoding];
     }
-    if (components.count > 1) {
-      value = [components[1] stringByRemovingPercentEncoding];
-    } else {
+    if (components.count == 1) {
+      // key with no value
       value = [NSNull null];
+    }
+    if (components.count == 2) {
+      value = [components[1] stringByRemovingPercentEncoding];
+    }
+    if (components.count > 2) {
+      // invalid - ignore this pair. is this best, though?
+      continue;
     }
     mute[key] = value;
   }

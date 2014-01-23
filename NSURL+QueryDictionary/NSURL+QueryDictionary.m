@@ -52,11 +52,23 @@ static NSString *const kFragmentBegin   = @"#";
   NSMutableDictionary *mute = @{}.mutableCopy;
   for (NSString *query in [self componentsSeparatedByString:kQuerySeparator]) {
     NSArray *components = [query componentsSeparatedByString:kQueryDivider];
-    if (components.count == 2) {
-      NSString *key = [components[0] stringByRemovingPercentEncoding];
-      NSString *value = [components[1] stringByRemovingPercentEncoding];
-      mute[key] = value;
+    NSString *key = nil;
+    id value = nil;
+    if (components.count > 0) {
+      key = [components[0] stringByRemovingPercentEncoding];
     }
+    if (components.count == 1) {
+      // key with no value
+      value = [NSNull null];
+    }
+    if (components.count == 2) {
+      value = [components[1] stringByRemovingPercentEncoding];
+    }
+    if (components.count > 2) {
+      // invalid - ignore this pair. is this best, though?
+      continue;
+    }
+    mute[key] = value;
   }
   return mute.count ? mute.copy : nil;
 }
@@ -70,13 +82,17 @@ static NSString *const kFragmentBegin   = @"#";
 - (NSString*) URLQueryString {
   NSMutableString *queryString = @"".mutableCopy;
   for (NSString *key in self.allKeys) {
-    NSString *value = [[self[key] description]
-                       stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    id rawValue = self[key];
+    NSString *value = nil;
+    // beware of empty or null
+    if (!(rawValue == [NSNull null] || ![rawValue description].length)) {
+      value = [[self[key] description] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
     [queryString appendFormat:@"%@%@%@%@",
      queryString.length ? kQuerySeparator : @"",    // appending?
      [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-     kQueryDivider,
-     value];
+     value ? kQueryDivider : @"",
+     value ? value : @""];
   }
   return queryString.length ? queryString.copy : nil;
 }

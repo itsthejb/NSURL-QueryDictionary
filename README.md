@@ -6,7 +6,16 @@ Just a simple NSURL category to make working with URL queries more pleasant.
 * `-[NSURL queryDictionary]` extract the URL's query string as key/value pairs.
 * `-[NSURL URLByAppendingQueryDictionary:]` append the specified key/value pairs to the URL, with existing query handled. Note that behaviour for overlapping keys/values is undefined.
 
+The parsing components of the above are also available separately as:
+
+* `-[NSString URLQueryDictionary]` split a valid query string into key/value pairs.
+* `-[NSDictionary URLQueryString]` the reverse of above; create a URL query string from an `NSDictionary` instance.
+
 ##Version history
+
+**v0.0.3**
+
+Split the query string parsing components out into `NSString` and `NSDictionary` categories for additional flexibility.
 
 **v0.0.2**
 

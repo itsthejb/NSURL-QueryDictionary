@@ -63,6 +63,8 @@ static NSString *const kFragmentBegin   = @"#";
     }
     if (components.count == 2) {
       value = [components[1] stringByRemovingPercentEncoding];
+      // cover case where there is a separator, but no actual value
+      value = [value length] ? value : [NSNull null];
     }
     if (components.count > 2) {
       // invalid - ignore this pair. is this best, though?

@@ -25,3 +25,29 @@
 - (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary;
 
 @end
+
+#pragma mark -
+
+@interface NSString (URLQuery)
+
+/**
+ *  @return If the receiver is a valid URL query component, returns
+ *  components as key/value pairs. If couldn't split into *any* pairs,
+ *  returns nil.
+ */
+- (NSDictionary*) URLQueryDictionary;
+
+@end
+
+#pragma mark -
+
+@interface NSDictionary (URLQuery)
+
+/**
+ *  @return URL query string component created from the keys and values in
+ *  the dictionary. Returns nil for an empty dictionary.
+ *  @see cavetas from the main `NSURL` category as well.
+ */
+- (NSString*) URLQueryString;
+
+@end

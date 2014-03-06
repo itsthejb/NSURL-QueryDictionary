@@ -52,11 +52,11 @@ static NSString *const kFragmentBegin   = @"#";
   NSMutableDictionary *mute = @{}.mutableCopy;
   for (NSString *query in [self componentsSeparatedByString:kQuerySeparator]) {
     NSArray *components = [query componentsSeparatedByString:kQueryDivider];
-    NSString *key = nil;
-    id value = nil;
-    if (components.count > 0) {
-      key = [components[0] stringByRemovingPercentEncoding];
+    if (components.count == 0) {
+      continue;
     }
+    NSString *key = [components[0] stringByRemovingPercentEncoding];;
+    id value = nil;
     if (components.count == 1) {
       // key with no value
       value = [NSNull null];
@@ -70,7 +70,7 @@ static NSString *const kFragmentBegin   = @"#";
       // invalid - ignore this pair. is this best, though?
       continue;
     }
-    mute[key] = value;
+    mute[key] = value ?: [NSNull null];
   }
   return mute.count ? mute.copy : nil;
 }

@@ -61,6 +61,14 @@
                         @"Did not create correctly formatted URL");
 }
 
+- (void) testShouldSortKeysWithOptionProvided {
+  NSDictionary *dict = @{@"xyz":@"bazzle",@"cat":@"cheese", @"foo":@"bar"};
+  XCTAssertEqualObjects([URL(@"http://www.foo.com")
+                         URLByAppendingQueryDictionary:dict withSortedKeys:YES].absoluteString,
+                        @"http://www.foo.com?cat=cheese&foo=bar&xyz=bazzle",
+                        @"Did not create correctly formatted URL");
+}
+
 - (void) testShouldEncodeKeysAndValues {
   NSDictionary *dict = @{@"翻訳":@"久しぶり"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com") URLByAppendingQueryDictionary:dict].absoluteString,

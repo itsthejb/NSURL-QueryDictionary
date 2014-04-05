@@ -19,9 +19,14 @@
 /**
  *  @return URL with keys values appending to query string
  *  @param queryDictionary Query keys/values
+ *  @param sortedKeys Sorted the keys alphabetically?
  *  @warning If keys overlap in receiver and query dictionary,
  *  behaviour is undefined.
  */
+- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary
+                          withSortedKeys:(BOOL) sortedKeys;
+
+/** As above, but `sortedKeys=NO` */
 - (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary;
 
 @end
@@ -46,8 +51,12 @@
 /**
  *  @return URL query string component created from the keys and values in
  *  the dictionary. Returns nil for an empty dictionary.
+ *  @param sortedKeys Sorted the keys alphabetically?
  *  @see cavetas from the main `NSURL` category as well.
  */
+- (NSString*) URLQueryStringWithSortedKeys:(BOOL) sortedKeys;
+
+/** As above, but `sortedKeys=NO` */
 - (NSString*) URLQueryString;
 
 @end

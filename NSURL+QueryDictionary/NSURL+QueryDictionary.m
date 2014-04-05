@@ -20,8 +20,14 @@ static NSString *const kFragmentBegin   = @"#";
 }
 
 - (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
+  return [self URLByAppendingQueryDictionary:queryDictionary withSortedKeys:NO];
+}
+
+- (NSURL *)URLByAppendingQueryDictionary:(NSDictionary *)queryDictionary
+                          withSortedKeys:(BOOL)sortedKeys
+{
   NSMutableArray *queries = self.query ? @[self.query].mutableCopy : @[].mutableCopy;
-  NSString *dictionaryQuery = queryDictionary.URLQueryString;
+  NSString *dictionaryQuery = [queryDictionary URLQueryStringWithSortedKeys:sortedKeys];
   if (dictionaryQuery) {
     [queries addObject:dictionaryQuery];
   }
@@ -81,9 +87,14 @@ static NSString *const kFragmentBegin   = @"#";
 
 @implementation NSDictionary (URLQuery)
 
-- (NSString*) URLQueryString {
+- (NSString *)URLQueryString {
+  return [self URLQueryStringWithSortedKeys:NO];
+}
+
+- (NSString*) URLQueryStringWithSortedKeys:(BOOL)sortedKeys {
   NSMutableString *queryString = @"".mutableCopy;
-  for (NSString *key in self.allKeys) {
+  NSArray *keys = sortedKeys ? [self.allKeys sortedArrayUsingSelector:@selector(compare:)] : self.allKeys;
+  for (NSString *key in keys) {
     id rawValue = self[key];
     NSString *value = nil;
     // beware of empty or null

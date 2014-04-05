@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = "NSURL+QueryDictionary"
-  s.version       = "0.0.5"
+  s.version       = "0.0.6"
   s.summary       = "Make working with NSURL queries more pleasant."
   s.description   = "Extract and append queries keys and values to NSURL as NSDictionaries"
   s.homepage      = "https://github.com/itsthejb/NSURL-QueryDictionary"

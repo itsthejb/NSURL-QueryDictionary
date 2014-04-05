@@ -1,0 +1,12 @@
+language: objective-c
+
+xcode_project: NSURL+QueryDictionary.xcodeproj
+xcode_scheme: UnitTests
+
+before_install: 
+    - brew unlink xctool
+    - brew install xctool --HEAD
+    - export LC_ALL="en_US.UTF-8"
+    - gem install cocoapods
+
+script: xctool -project NSURL+QueryDictionary.xcodeproj -scheme UnitTests test

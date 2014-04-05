@@ -1,6 +1,6 @@
 language: objective-c
 
-xcode_project: NSURL+QueryDictionary.xcodepro
+xcode_project: NSURL+QueryDictionary.xcodeproj
 xcode_scheme: UnitTests
 
 before_install: 

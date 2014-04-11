@@ -18,6 +18,10 @@ Queries with empty values are converted to `NSNull` and vice versa as of v0.0.5.
 
 ##Version history
 
+**v0.0.7**
+
+Fixed a potential issue/static analyser false positive with thanks to [Adam Lickel](https://github.com/lickel).
+
 **v0.0.6**
 
 Added optional flag to sort the dictionary's keys alphabetically when generating the URL. This makes the generated URLs more deterministic, which helps (for example) if you are running unit tests to inspect your URLs and would like to test the absolute string, rather than having to recreate a query dictionary.

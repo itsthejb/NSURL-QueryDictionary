@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/itsthejb/NSURL-QueryDictionary.svg?branch=master)](https://travis-ci.org/itsthejb/NSURL-QueryDictionary)
 [![Build Status](https://travis-ci.org/itsthejb/NSURL-QueryDictionary.svg?branch=develop)](https://travis-ci.org/itsthejb/NSURL-QueryDictionary)
 
+(Travis is does not yet support iOS7)
+
 NSURL-QueryDictionary
 =====================
 

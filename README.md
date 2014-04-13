@@ -20,7 +20,7 @@ Queries with empty values are converted to `NSNull` and vice versa as of `v0.0.5
 
 ##Version history
 
-**v1.0.1**
+**v1.0.2**
 
 * Added category prefixes at the suggestion of [Mike Abdullah](https://github.com/mikeabdullah).
 * Now compiles for OSX 10.8, with thanks to [Elliot Chance](https://github.com/elliotchance).

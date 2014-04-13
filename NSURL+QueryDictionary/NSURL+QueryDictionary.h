@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSURL (Query)
+@interface NSURL (UQ_URLQuery)
 
-/** 
- *  @return URL's query component as keys/values 
+/**
+ *  @return URL's query component as keys/values
  *  Returns nil for an empty query
  */
-- (NSDictionary*) queryDictionary;
+- (NSDictionary*) uq_queryDictionary;
 
 /**
  *  @return URL with keys values appending to query string
@@ -23,30 +23,30 @@
  *  @warning If keys overlap in receiver and query dictionary,
  *  behaviour is undefined.
  */
-- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary
-                          withSortedKeys:(BOOL) sortedKeys;
+- (NSURL*) uq_URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary
+                             withSortedKeys:(BOOL) sortedKeys;
 
 /** As above, but `sortedKeys=NO` */
-- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary;
+- (NSURL*) uq_URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary;
 
 @end
 
 #pragma mark -
 
-@interface NSString (URLQuery)
+@interface NSString (UQ_URLQuery)
 
 /**
  *  @return If the receiver is a valid URL query component, returns
  *  components as key/value pairs. If couldn't split into *any* pairs,
  *  returns nil.
  */
-- (NSDictionary*) URLQueryDictionary;
+- (NSDictionary*) uq_URLQueryDictionary;
 
 @end
 
 #pragma mark -
 
-@interface NSDictionary (URLQuery)
+@interface NSDictionary (UQ_URLQuery)
 
 /**
  *  @return URL query string component created from the keys and values in
@@ -54,9 +54,9 @@
  *  @param sortedKeys Sorted the keys alphabetically?
  *  @see cavetas from the main `NSURL` category as well.
  */
-- (NSString*) URLQueryStringWithSortedKeys:(BOOL) sortedKeys;
+- (NSString*) uq_URLQueryStringWithSortedKeys:(BOOL) sortedKeys;
 
 /** As above, but `sortedKeys=NO` */
-- (NSString*) URLQueryString;
+- (NSString*) uq_URLQueryString;
 
 @end

@@ -18,6 +18,11 @@ Queries with empty values are converted to `NSNull` and vice versa as of v0.0.5.
 
 ##Version history
 
+**v1.0.0**
+
+* Added category prefixes at the suggestion of [Mike Abdullah](https://github.com/mikeabdullah).
+* Now compiles for OSX 10.8, with thanks to [Elliot Chance](https://github.com/elliotchance).
+
 **v0.0.7**
 
 Fixed a potential issue/static analyser false positive with thanks to [Adam Lickel](https://github.com/lickel).

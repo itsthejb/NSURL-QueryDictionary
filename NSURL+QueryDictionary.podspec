@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author        = { "Jonathan Crooke" => "jon.crooke@gmail.com" }
   s.source        = { :git => "https://github.com/itsthejb/NSURL-QueryDictionary.git", :tag => "v" + s.version.to_s }
   s.ios.deployment_target = '7.0'
-  s.osx.deployment_target = '10.9'
+  s.osx.deployment_target = '10.8'
   s.source_files  = s.name + '/*.{h,m}'
   s.frameworks    = 'Foundation'
   s.requires_arc  = true

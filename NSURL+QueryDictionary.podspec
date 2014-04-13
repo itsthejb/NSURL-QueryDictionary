@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name          = "NSURL+QueryDictionary"
-  s.version       = "1.0.0"
+  s.version       = "1.0.1"
   s.summary       = "Make working with NSURL queries more pleasant."
-  s.description   = "Extract and append queries keys and values to NSURL as NSDictionaries"
+  s.description   = "NSURL, NSString and NSDictionary categories for working with URL queries"
   s.homepage      = "https://github.com/itsthejb/NSURL-QueryDictionary"
   s.license       = { :type => 'MIT', :file => 'LICENSE' }
   s.author        = { "Jonathan Crooke" => "jon.crooke@gmail.com" }

@@ -13,21 +13,21 @@ static NSString *const kQueryDivider    = @"=";
 static NSString *const kQueryBegin      = @"?";
 static NSString *const kFragmentBegin   = @"#";
 
-@implementation NSURL (Query)
+@implementation NSURL (UQ_URLQuery)
 
-- (NSDictionary*) queryDictionary {
-  return self.query.URLQueryDictionary;
+- (NSDictionary*) uq_queryDictionary {
+  return self.query.uq_URLQueryDictionary;
 }
 
-- (NSURL*) URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
-  return [self URLByAppendingQueryDictionary:queryDictionary withSortedKeys:NO];
+- (NSURL*) uq_URLByAppendingQueryDictionary:(NSDictionary*) queryDictionary {
+  return [self uq_URLByAppendingQueryDictionary:queryDictionary withSortedKeys:NO];
 }
 
-- (NSURL *)URLByAppendingQueryDictionary:(NSDictionary *)queryDictionary
+- (NSURL *)uq_URLByAppendingQueryDictionary:(NSDictionary *)queryDictionary
                           withSortedKeys:(BOOL)sortedKeys
 {
   NSMutableArray *queries = self.query ? @[self.query].mutableCopy : @[].mutableCopy;
-  NSString *dictionaryQuery = [queryDictionary URLQueryStringWithSortedKeys:sortedKeys];
+  NSString *dictionaryQuery = [queryDictionary uq_URLQueryStringWithSortedKeys:sortedKeys];
   if (dictionaryQuery) {
     [queries addObject:dictionaryQuery];
   }
@@ -54,7 +54,7 @@ static NSString *const kFragmentBegin   = @"#";
 
 @implementation NSString (URLQuery)
 
-- (NSDictionary*) URLQueryDictionary {
+- (NSDictionary*) uq_URLQueryDictionary {
   NSMutableDictionary *mute = @{}.mutableCopy;
   for (NSString *query in [self componentsSeparatedByString:kQuerySeparator]) {
     NSArray *components = [query componentsSeparatedByString:kQueryDivider];
@@ -87,11 +87,11 @@ static NSString *const kFragmentBegin   = @"#";
 
 @implementation NSDictionary (URLQuery)
 
-- (NSString *)URLQueryString {
-  return [self URLQueryStringWithSortedKeys:NO];
+- (NSString *)uq_URLQueryString {
+  return [self uq_URLQueryStringWithSortedKeys:NO];
 }
 
-- (NSString*) URLQueryStringWithSortedKeys:(BOOL)sortedKeys {
+- (NSString*) uq_URLQueryStringWithSortedKeys:(BOOL)sortedKeys {
   NSMutableString *queryString = @"".mutableCopy;
   NSArray *keys = sortedKeys ? [self.allKeys sortedArrayUsingSelector:@selector(compare:)] : self.allKeys;
   for (NSString *key in keys) {

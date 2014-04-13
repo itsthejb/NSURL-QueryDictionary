@@ -1,8 +1,6 @@
 [![Build Status](https://travis-ci.org/itsthejb/NSURL-QueryDictionary.svg?branch=master)](https://travis-ci.org/itsthejb/NSURL-QueryDictionary)
 [![Build Status](https://travis-ci.org/itsthejb/NSURL-QueryDictionary.svg?branch=develop)](https://travis-ci.org/itsthejb/NSURL-QueryDictionary)
 
-(Travis is does not yet support iOS7)
-
 NSURL-QueryDictionary
 =====================
 
@@ -19,6 +17,11 @@ The parsing components of the above are also available separately as:
 Queries with empty values are converted to `NSNull` and vice versa as of v0.0.5.
 
 ##Version history
+
+**v1.0.0**
+
+* Added category prefixes at the suggestion of [Mike Abdullah](https://github.com/mikeabdullah).
+* Now compiles for OSX 10.8, with thanks to [Elliot Chance](https://github.com/elliotchance).
 
 **v0.0.7**
 

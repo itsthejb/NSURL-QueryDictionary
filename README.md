@@ -4,21 +4,23 @@
 NSURL-QueryDictionary
 =====================
 
-Just a simple NSURL category to make working with URL queries more pleasant.
+Just some simple `NSURL`, `NSString` and `NSDictionary` categories to make working with URL queries more pleasant.
 
-* `-[NSURL queryDictionary]` extract the URL's query string as key/value pairs.
-* `-[NSURL URLByAppendingQueryDictionary:]` append the specified key/value pairs to the URL, with existing query handled. Note that behaviour for overlapping keys/values is undefined.
+* `-[NSURL uq_queryDictionary]` extract the URL's query string as key/value pairs.
+* `-[NSURL uq_URLByAppendingQueryDictionary:]` append the specified key/value pairs to the URL, with existing query handled. Note that behaviour for overlapping keys/values is undefined.
 
 The parsing components of the above are also available separately as:
 
-* `-[NSString URLQueryDictionary]` split a valid query string into key/value pairs.
-* `-[NSDictionary URLQueryString]` the reverse of above; create a URL query string from an `NSDictionary` instance.
+* `-[NSString uq_URLQueryDictionary]` split a valid query string into key/value pairs.
+* `-[NSDictionary uq_URLQueryString]` the reverse of above; create a URL query string from an `NSDictionary` instance.
 
-Queries with empty values are converted to `NSNull` and vice versa as of v0.0.5.
+The methods returning URL instances have `withSortedKeys:` partner methods that sort the dictionary's keys alphabetically with `YES`. This is so as to make the generated URL's string deterministic, with is necessary if you're unit testing URLs created using these methods - at least this was helpful for me!
+
+Queries with empty values are converted to `NSNull` and vice versa as of `v0.0.5`.
 
 ##Version history
 
-**v1.0.0**
+**v1.0.1**
 
 * Added category prefixes at the suggestion of [Mike Abdullah](https://github.com/mikeabdullah).
 * Now compiles for OSX 10.8, with thanks to [Elliot Chance](https://github.com/elliotchance).

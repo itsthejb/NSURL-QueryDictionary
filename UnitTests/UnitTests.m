@@ -53,6 +53,14 @@
                         @"Did not create correctly formatted URL");
 }
 
+- (void) testShouldAppendWhenURLContainsJustQueryBegin {
+    NSDictionary *dict = @{@"key":@"value"};
+    XCTAssertEqualObjects([URL(@"http://www.foo.com/path?")
+        uq_URLByAppendingQueryDictionary:dict].absoluteString,
+    @"http://www.foo.com/path?key=value",
+    @"Did not create correctly formatted URL");
+}
+
 - (void) testShouldAppendToExistingQueryWithFragment {
   NSDictionary *dict = @{@"cat":@"cheese", @"foo":@"bar"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com?aKey=aValue&another=val2#fragment")

@@ -26,7 +26,7 @@ static NSString *const kFragmentBegin   = @"#";
 - (NSURL *)uq_URLByAppendingQueryDictionary:(NSDictionary *)queryDictionary
                           withSortedKeys:(BOOL)sortedKeys
 {
-  NSMutableArray *queries = self.query ? @[self.query].mutableCopy : @[].mutableCopy;
+  NSMutableArray *queries = [self.query length] > 0 ? @[self.query].mutableCopy : @[].mutableCopy;
   NSString *dictionaryQuery = [queryDictionary uq_URLQueryStringWithSortedKeys:sortedKeys];
   if (dictionaryQuery) {
     [queries addObject:dictionaryQuery];

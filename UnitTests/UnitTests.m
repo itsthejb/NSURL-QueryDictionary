@@ -11,6 +11,8 @@
 
 #define URL(STRING) ((NSURL*) [NSURL URLWithString: STRING])
 
+extern NSString *const uq_URLReservedChars;
+
 @interface UnitTests : XCTestCase
 @end
 
@@ -84,6 +86,22 @@
                         @"Did not return correct keys/values");
 }
 
+- (void) testShouldEncodeValuesContainingReservedCharacters {
+    NSDictionary *dict = @{@"q": @"gin & tonic", @"other": uq_URLReservedChars};
+
+    XCTAssertEqualObjects([URL(@"http://www.foo.com") uq_URLByAppendingQueryDictionary:dict].absoluteString,
+    @"http://www.foo.com?q=gin%20%26%20tonic&other=%EF%BF%BC%3D%2C%21%24%26%27%28%29%2A%2B%3B%40%3F%0D%0A%22%3C%3E%23%09%20%3A%2F",
+    @"Did not return correct keys/values");
+}
+
+- (void) testShouldEncodeKeysContainingReservedCharacters {
+    NSDictionary *dict = @{ uq_URLReservedChars: @YES};
+
+    XCTAssertEqualObjects([URL(@"http://www.foo.com") uq_URLByAppendingQueryDictionary:dict].absoluteString,
+    @"http://www.foo.com?%EF%BF%BC%3D%2C%21%24%26%27%28%29%2A%2B%3B%40%3F%0D%0A%22%3C%3E%23%09%20%3A%2F=1",
+    @"Did not return correct keys/values");
+}
+
 - (void) testShouldDealWithEmptyDictionary {
   NSString *urlString = @"http://www.foo.com?aKey=aValue&another=val2#fragment";
   XCTAssertEqualObjects([URL(urlString) uq_URLByAppendingQueryDictionary:@{}].absoluteString,
@@ -95,7 +113,7 @@
   NSDictionary *dict = @{@"number":@47, @"date":[NSDate distantPast]};
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
-                        @"http://www.foo.com/path?number=47&date=0001-12-30%2000:00:00%20+0000",
+                        @"http://www.foo.com/path?number=47&date=0001-12-30%2000%3A00%3A00%20%2B0000",
                         @"Did not create correctly formatted URL");
 }
 

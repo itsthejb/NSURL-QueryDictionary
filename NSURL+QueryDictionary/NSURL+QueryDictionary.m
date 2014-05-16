@@ -8,6 +8,7 @@
 
 #import "NSURL+QueryDictionary.h"
 
+NSString *const uq_URLReservedChars     = @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
 static NSString *const kQuerySeparator  = @"&";
 static NSString *const kQueryDivider    = @"=";
 static NSString *const kQueryBegin      = @"?";
@@ -87,6 +88,8 @@ static NSString *const kFragmentBegin   = @"#";
 
 @implementation NSDictionary (URLQuery)
 
+static inline NSString *uq_URLEscape(NSString *string);
+
 - (NSString *)uq_URLQueryString {
   return [self uq_URLQueryStringWithSortedKeys:NO];
 }
@@ -99,15 +102,24 @@ static NSString *const kFragmentBegin   = @"#";
     NSString *value = nil;
     // beware of empty or null
     if (!(rawValue == [NSNull null] || ![rawValue description].length)) {
-      value = [[self[key] description] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      value = uq_URLEscape([self[key] description]);
     }
     [queryString appendFormat:@"%@%@%@%@",
      queryString.length ? kQuerySeparator : @"",    // appending?
-     [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+     uq_URLEscape(key),
      value ? kQueryDivider : @"",
      value ? value : @""];
   }
   return queryString.length ? queryString.copy : nil;
+}
+
+static inline NSString *uq_URLEscape(NSString *string) {
+    return ((__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
+        NULL,
+        (__bridge CFStringRef)string,
+        NULL,
+        (__bridge CFStringRef)uq_URLReservedChars,
+        kCFStringEncodingUTF8));
 }
 
 @end

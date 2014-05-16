@@ -20,6 +20,10 @@ Queries with empty values are converted to `NSNull` and vice versa as of `v0.0.5
 
 ##Version history
 
+**v1.0.3**
+
+Bug fixes courtesy of [Jan Berkel](https://github.com/jberkel), [Elliot Chance](https://github.com/elliotchance) and [Grzegorz Nowicki](https://github.com/wikia-gregor). [1](https://github.com/itsthejb/NSURL-QueryDictionary/pull/6), [2](https://github.com/itsthejb/NSURL-QueryDictionary/pull/7), [3](https://github.com/itsthejb/NSURL-QueryDictionary/pull/5).
+
 **v1.0.2**
 
 * Added category prefixes at the suggestion of [Mike Abdullah](https://github.com/mikeabdullah).

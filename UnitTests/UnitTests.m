@@ -110,10 +110,10 @@ extern NSString *const uq_URLReservedChars;
 }
 
 - (void) testShouldHandleDictionaryValuesOtherThanStrings {
-  NSDictionary *dict = @{@"number":@47, @"date":[NSDate distantPast]};
+  NSDictionary *dict = @{@"number":@47, @"date":[NSDate dateWithTimeIntervalSince1970:0]};
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
-                        @"http://www.foo.com/path?number=47&date=0001-12-30%2000%3A00%3A00%20%2B0000",
+                        @"http://www.foo.com/path?number=47&date=1970-01-01%2000%3A00%3A00%20%2B0000",
                         @"Did not create correctly formatted URL");
 }
 

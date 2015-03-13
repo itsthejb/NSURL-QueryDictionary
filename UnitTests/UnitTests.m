@@ -154,6 +154,17 @@ extern NSString *const uq_URLReservedChars;
                         @"Did not return correct keys/values");
 }
 
+- (void) testShouldCreateURLByRemovingQuery {
+  XCTAssertEqualObjects([URL(@"http://www.foo.com/path/?cat=cheese&foo=bar") uq_URLByRemovingQuery],
+                        URL(@"http://www.foo.com/path/"));
+}
+
+- (void) testShouldCreateURLByReplacingQueryDictionary {
+  NSURL *url = URL(@"http://www.foo.com/?cat=cheese&foo=bar");
+  NSURL *url2 = [url uq_URLByReplacingQueryWithDictionary:@{ @"tree" : @1}];
+  XCTAssertEqualObjects(url2, URL(@"http://www.foo.com/?tree=1"));
+}
+
 @end
 
 #undef URL

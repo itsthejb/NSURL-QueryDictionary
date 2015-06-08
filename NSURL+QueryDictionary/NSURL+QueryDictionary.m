@@ -8,11 +8,11 @@
 
 #import "NSURL+QueryDictionary.h"
 
-NSString *const uq_URLReservedChars     = @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
-static NSString *const kQuerySeparator  = @"&";
-static NSString *const kQueryDivider    = @"=";
-static NSString *const kQueryBegin      = @"?";
-static NSString *const kFragmentBegin   = @"#";
+static NSString *const uq_URLReservedChars  = @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
+static NSString *const kQuerySeparator      = @"&";
+static NSString *const kQueryDivider        = @"=";
+static NSString *const kQueryBegin          = @"?";
+static NSString *const kFragmentBegin       = @"#";
 
 @implementation NSURL (UQ_URLQuery)
 

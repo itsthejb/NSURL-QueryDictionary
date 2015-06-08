@@ -11,7 +11,7 @@
 
 #define URL(STRING) ((NSURL*) [NSURL URLWithString: STRING])
 
-extern NSString *const uq_URLReservedChars;
+static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
 
 @interface UnitTests : XCTestCase
 @end

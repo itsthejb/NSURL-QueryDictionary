@@ -18,28 +18,28 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
 
 @implementation UnitTests
 
-- (void) testShouldExtractQueryDictionary {
+- (void)testShouldExtractQueryDictionary {
   NSDictionary *dict = @{@"cat":@"cheese", @"foo":@"bar"};
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?cat=cheese&foo=bar").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldExtractQueryWithEncodedValues {
+- (void)testShouldExtractQueryWithEncodedValues {
   NSDictionary *dict = @{@"翻訳":@"久しぶり"};
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?%E7%BF%BB%E8%A8%B3=%E4%B9%85%E3%81%97%E3%81%B6%E3%82%8A").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldIgnoreInvalidQueryComponent {
+- (void)testShouldIgnoreInvalidQueryComponent {
   NSDictionary *dict = @{@"cat":@"cheese"};
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?cat=cheese&invalid=foo=bar").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldCreateSimpleQuery {
+- (void)testShouldCreateSimpleQuery {
   NSDictionary *dict = @{@"cat":@"cheese", @"foo":@"bar"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -47,7 +47,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldAppendASimpleQuery {
+- (void)testShouldAppendASimpleQuery {
   NSDictionary *dict = @{@"key":@"value"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -55,7 +55,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldAppendWhenURLContainsJustQueryBegin {
+- (void)testShouldAppendWhenURLContainsJustQueryBegin {
     NSDictionary *dict = @{@"key":@"value"};
     XCTAssertEqualObjects([URL(@"http://www.foo.com/path?")
         uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -63,7 +63,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
     @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldAppendToExistingQueryWithFragment {
+- (void)testShouldAppendToExistingQueryWithFragment {
   NSDictionary *dict = @{@"cat":@"cheese", @"foo":@"bar"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com?aKey=aValue&another=val2#fragment")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -71,7 +71,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldSortKeysWithOptionProvided {
+- (void)testShouldSortKeysWithOptionProvided {
   NSDictionary *dict = @{@"xyz":@"bazzle",@"cat":@"cheese", @"foo":@"bar"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com")
                          uq_URLByAppendingQueryDictionary:dict withSortedKeys:YES].absoluteString,
@@ -79,14 +79,14 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldEncodeKeysAndValues {
+- (void)testShouldEncodeKeysAndValues {
   NSDictionary *dict = @{@"翻訳":@"久しぶり"};
   XCTAssertEqualObjects([URL(@"http://www.foo.com") uq_URLByAppendingQueryDictionary:dict].absoluteString,
                         @"http://www.foo.com?%E7%BF%BB%E8%A8%B3=%E4%B9%85%E3%81%97%E3%81%B6%E3%82%8A",
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldEncodeValuesContainingReservedCharacters {
+- (void)testShouldEncodeValuesContainingReservedCharacters {
     NSDictionary *dict = @{@"q": @"gin & tonic", @"other": uq_URLReservedChars};
 
     XCTAssertEqualObjects([URL(@"http://www.foo.com") uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -94,7 +94,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
     @"Did not return correct keys/values");
 }
 
-- (void) testShouldEncodeKeysContainingReservedCharacters {
+- (void)testShouldEncodeKeysContainingReservedCharacters {
     NSDictionary *dict = @{ uq_URLReservedChars: @YES};
 
     XCTAssertEqualObjects([URL(@"http://www.foo.com") uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -102,14 +102,14 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
     @"Did not return correct keys/values");
 }
 
-- (void) testShouldDealWithEmptyDictionary {
+- (void)testShouldDealWithEmptyDictionary {
   NSString *urlString = @"http://www.foo.com?aKey=aValue&another=val2#fragment";
   XCTAssertEqualObjects([URL(urlString) uq_URLByAppendingQueryDictionary:@{}].absoluteString,
                         urlString,
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldHandleDictionaryValuesOtherThanStrings {
+- (void)testShouldHandleDictionaryValuesOtherThanStrings {
   NSDictionary *dict = @{@"number":@47, @"date":[NSDate dateWithTimeIntervalSince1970:0]};
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -117,7 +117,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldHandleDictionaryWithEmptyPropertiesCorrectly {
+- (void)testShouldHandleDictionaryWithEmptyPropertiesCorrectly {
   NSDictionary *dict = @{ @"key" : @"" };
   XCTAssertEqualObjects([URL(@"http://www.foo.com/")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -125,7 +125,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldHandleDictionaryWithNullPropertyCorrectly {
+- (void)testShouldHandleDictionaryWithNullPropertyCorrectly {
   NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
   XCTAssertEqualObjects([URL(@"http://www.foo.com/")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
@@ -133,33 +133,33 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
                         @"Did not create correctly formatted URL");
 }
 
-- (void) testShouldConvertURLWithEmptyQueryValueToNSNull {
+- (void)testShouldConvertURLWithEmptyQueryValueToNSNull {
   NSDictionary *dict = @{ @"key" : [NSNull null] };
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?key").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldHandlePossiblyInvalidURLWithSeparatorButNoValue {
+- (void)testShouldHandlePossiblyInvalidURLWithSeparatorButNoValue {
   NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?key1=&key2=value").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldConvertURLWithEmptyQueryValueToNSNullWithMultipleKeys {
+- (void)testShouldConvertURLWithEmptyQueryValueToNSNullWithMultipleKeys {
   NSDictionary *dict = @{ @"key1" : [NSNull null], @"key2" : @"value" };
   XCTAssertEqualObjects(URL(@"http://www.foo.com/?key1&key2=value").uq_queryDictionary,
                         dict,
                         @"Did not return correct keys/values");
 }
 
-- (void) testShouldCreateURLByRemovingQuery {
+- (void)testShouldCreateURLByRemovingQuery {
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path/?cat=cheese&foo=bar") uq_URLByRemovingQuery],
                         URL(@"http://www.foo.com/path/"));
 }
 
-- (void) testShouldCreateURLByReplacingQueryDictionary {
+- (void)testShouldCreateURLByReplacingQueryDictionary {
   NSURL *url = URL(@"http://www.foo.com/?cat=cheese&foo=bar");
   NSURL *url2 = [url uq_URLByReplacingQueryWithDictionary:@{ @"tree" : @1}];
   XCTAssertEqualObjects(url2, URL(@"http://www.foo.com/?tree=1"));

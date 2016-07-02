@@ -51,7 +51,9 @@
 				496436DD185739A100EA6A1B /* NSURL+QueryDictionary.podspec */,
 				496436DA185738C200EA6A1B /* README.md */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		490D10DD18572D4F00F4AC4C /* Products */ = {
 			isa = PBXGroup;

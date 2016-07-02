@@ -81,14 +81,14 @@ static NSString *const kFragmentBegin       = @"#";
     if (components.count == 0) {
       continue;
     }
-    NSString *key = [components[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *key = [components[0] stringByRemovingPercentEncoding];
     id value = nil;
     if (components.count == 1) {
       // key with no value
       value = [NSNull null];
     }
     if (components.count == 2) {
-      value = [components[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      value = [components[1] stringByRemovingPercentEncoding];
       // cover case where there is a separator, but no actual value
       value = [value length] ? value : [NSNull null];
     }
@@ -101,13 +101,16 @@ static NSString *const kFragmentBegin       = @"#";
   return mute.count ? mute.copy : nil;
 }
 
+- (NSString*)uq_stringByPercentageEncodingWithReservedCharacters {
+  return [self stringByAddingPercentEncodingWithAllowedCharacters:
+          [NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
 @end
 
 #pragma mark -
 
 @implementation NSDictionary (URLQuery)
-
-static inline NSString *uq_URLEscape(NSString *string);
 
 - (NSString *)uq_URLQueryString {
   return [self uq_URLQueryStringWithSortedKeys:NO];
@@ -121,24 +124,15 @@ static inline NSString *uq_URLEscape(NSString *string);
     NSString *value = nil;
     // beware of empty or null
     if (!(rawValue == [NSNull null] || ![rawValue description].length)) {
-      value = uq_URLEscape([self[key] description]);
+      value = [self[key] description];
     }
     [queryString appendFormat:@"%@%@%@%@",
      queryString.length ? kQuerySeparator : @"",    // appending?
-     uq_URLEscape(key),
+     key,
      value ? kQueryDivider : @"",
      value ? value : @""];
   }
-  return queryString.length ? queryString.copy : nil;
-}
-
-static inline NSString *uq_URLEscape(NSString *string) {
-    return ((__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
-        NULL,
-        (__bridge CFStringRef)string,
-        NULL,
-        (__bridge CFStringRef)uq_URLReservedChars,
-        kCFStringEncodingUTF8));
+  return queryString.length ? [queryString uq_stringByPercentageEncodingWithReservedCharacters] : nil;
 }
 
 @end

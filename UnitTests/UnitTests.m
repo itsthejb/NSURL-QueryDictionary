@@ -90,7 +90,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
     NSDictionary *dict = @{@"q": @"gin & tonic", @"other": uq_URLReservedChars};
 
     XCTAssertEqualObjects([URL(@"http://www.foo.com/") uq_URLByAppendingQueryDictionary:dict].absoluteString,
-    @"http://www.foo.com/?q=gin%20%26%20tonic&other=%EF%BF%BC%3D%2C%21%24%26%27%28%29%2A%2B%3B%40%3F%0D%0A%22%3C%3E%23%09%20%3A%2F",
+    @"http://www.foo.com/?q=gin%20&%20tonic&other=%EF%BF%BC=,!$&'()*+;@?%0D%0A%22%3C%3E%23%09%20:/",
     @"Did not return correct keys/values");
 }
 
@@ -98,7 +98,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
     NSDictionary *dict = @{ uq_URLReservedChars: @YES};
 
     XCTAssertEqualObjects([URL(@"http://www.foo.com/") uq_URLByAppendingQueryDictionary:dict].absoluteString,
-    @"http://www.foo.com/?%EF%BF%BC%3D%2C%21%24%26%27%28%29%2A%2B%3B%40%3F%0D%0A%22%3C%3E%23%09%20%3A%2F=1",
+    @"http://www.foo.com/?%EF%BF%BC=,!$&'()*+;@?%0D%0A%22%3C%3E%23%09%20:/=1",
     @"Did not return correct keys/values");
 }
 
@@ -113,7 +113,7 @@ static NSString *const uq_URLReservedChars =  @"￼=,!$&'()*+;@?\r\n\"<>#\t :/";
   NSDictionary *dict = @{@"number":@47, @"date":[NSDate dateWithTimeIntervalSince1970:0]};
   XCTAssertEqualObjects([URL(@"http://www.foo.com/path")
                          uq_URLByAppendingQueryDictionary:dict].absoluteString,
-                        @"http://www.foo.com/path?number=47&date=1970-01-01%2000%3A00%3A00%20%2B0000",
+                        @"http://www.foo.com/path?number=47&date=1970-01-01%2000:00:00%20+0000",
                         @"Did not create correctly formatted URL");
 }
 

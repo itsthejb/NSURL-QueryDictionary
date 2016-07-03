@@ -35,15 +35,10 @@ static NSString *const kFragmentBegin       = @"#";
   NSString *newQuery = [queries componentsJoinedByString:kQuerySeparator];
 
   if (newQuery.length) {
-    NSArray *queryComponents = [self.absoluteString componentsSeparatedByString:kQueryBegin];
-    if (queryComponents.count) {
-      return [NSURL URLWithString:
-              [NSString stringWithFormat:@"%@%@%@%@%@",
-               queryComponents[0],                      // existing url
-               kQueryBegin,
-               newQuery,
-               self.fragment.length ? kFragmentBegin : @"",
-               self.fragment.length ? self.fragment : @""]];
+    NSURLComponents *components = [NSURLComponents componentsWithURL:self resolvingAgainstBaseURL:YES];
+    if (components) {
+      components.query = newQuery;
+      return components.URL;
     }
   }
   return self;
@@ -101,11 +96,6 @@ static NSString *const kFragmentBegin       = @"#";
   return mute.count ? mute.copy : nil;
 }
 
-- (NSString*)uq_stringByPercentageEncodingWithReservedCharacters {
-  return [self stringByAddingPercentEncodingWithAllowedCharacters:
-          [NSCharacterSet URLQueryAllowedCharacterSet]];
-}
-
 @end
 
 #pragma mark -
@@ -132,7 +122,7 @@ static NSString *const kFragmentBegin       = @"#";
      value ? kQueryDivider : @"",
      value ? value : @""];
   }
-  return queryString.length ? [queryString uq_stringByPercentageEncodingWithReservedCharacters] : nil;
+  return queryString.length ? queryString : nil;
 }
 
 @end

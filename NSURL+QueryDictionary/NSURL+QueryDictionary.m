@@ -37,13 +37,16 @@ static NSString *const kFragmentBegin       = @"#";
   if (newQuery.length) {
     NSArray *queryComponents = [self.absoluteString componentsSeparatedByString:kQueryBegin];
     if (queryComponents.count) {
-      return [NSURL URLWithString:
-              [NSString stringWithFormat:@"%@%@%@%@%@",
-               queryComponents[0],                      // existing url
-               kQueryBegin,
-               newQuery,
-               self.fragment.length ? kFragmentBegin : @"",
-               self.fragment.length ? self.fragment : @""]];
+      NSArray *fragmentComponents = [queryComponents[0] componentsSeparatedByString:kFragmentBegin];
+      if (fragmentComponents.count) {
+        return [NSURL URLWithString:
+                [NSString stringWithFormat:@"%@%@%@%@%@",
+                 fragmentComponents[0],                      // existing url
+                 kQueryBegin,
+                 newQuery,
+                 self.fragment.length ? kFragmentBegin : @"",
+                 self.fragment.length ? self.fragment : @""]];
+      }
     }
   }
   return self;
